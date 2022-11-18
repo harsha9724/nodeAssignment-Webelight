@@ -5,7 +5,9 @@ const swaggerUI=require("swagger-ui-express");
 const mongoose=require("mongoose");
 const userRouter=require("./routes/user");
 const productRouter=require("./routes/product");
-
+const dotenv = require("dotenv");
+dotenv.config();
+const port=5000 || process.env.PORT
 const options={
     definition:{
         openapi:"3.0.0",
@@ -15,7 +17,7 @@ const options={
         },
         servers:[
             {
-                url:"http://localhost:5000"
+                url:`http://localhost:${port}`
             }
         ]
     },
@@ -42,9 +44,9 @@ app.use("/",productRouter);
 
 
 
-app.listen(5000,()=>{
-    mongoose.connect("mongodb+srv://Harsha:harsha%401234@cluster0.ohltzw6.mongodb.net/?retryWrites=true&w=majority",{useNewUrlParser: true},()=>{
+app.listen(port, ()=>{
+    mongoose.connect(process.env.MONGO_URL,{useNewUrlParser: true},()=>{
     console.log("connected to database");
 })
-    console.log("server is up at 5000");
+    console.log(`server is up at ${port}`);
 })

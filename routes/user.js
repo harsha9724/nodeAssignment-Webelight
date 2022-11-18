@@ -8,7 +8,7 @@ const User = require("../models/user");
 var jwt = require('jsonwebtoken');
 router.use(bodyparser());
 
-const secret="harsha"
+const secret=process.env.SECRET
 
 /**
  * ********* swagger schema *******

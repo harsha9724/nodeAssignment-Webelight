@@ -1,9 +1,9 @@
 const { verify } = require('jsonwebtoken')
 const user = require('../models/user');
-const secret="harsha"
+const secret=process.env.SECRET
 
 const validateToken = (req, res, next) => {
-    const accessToken = req.headers.authorization;
+    const accessToken = req.headers.auth;
 
     if (!accessToken) {
         return res.status(400).json({ message: "User not Logged In" })
